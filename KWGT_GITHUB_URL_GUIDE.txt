@@ -41,6 +41,36 @@ https://raw.githubusercontent.com/AshwinSoni-01/Kwgt_assets/main/sets/$gv(iconse
 {BRANCH} = main
 {PATH_TO_FILE} = sets/$gv(iconset)$/$gv(theme)$/$gv(weather)$.svg
 
+Understanding GitHub URL Paths: Blob vs Tree
+---------------------------------------------
+GitHub URLs use different path patterns to distinguish between files and folders:
+
+Format: https://github.com/{owner}/{repo}/[blob|tree]/{branch}/{path}
+
+BLOB = File
+- Pattern: /blob/
+- Example: https://github.com/AshwinSoni-01/Kwgt_assets/blob/main/KWGT_GITHUB_URL_GUIDE.txt
+- Shows the file content in the GitHub web interface
+- Use raw.githubusercontent.com with blob URLs to get raw file content
+
+TREE = Directory/Folder
+- Pattern: /tree/
+- Example: https://github.com/AshwinSoni-01/Kwgt_assets/tree/main/sets
+- Shows the folder contents and file listing
+- Cannot be used with raw.githubusercontent.com
+- ❌ Do NOT use tree URLs with KWGT - they won't work
+
+Repository Root
+- Example: https://github.com/AshwinSoni-01/Kwgt_assets
+- Shows the main branch contents and README file (if present)
+- Displays file/folder listing
+- Not a specific file or directory view
+
+Quick Reference:
+- /blob/ = file → use with raw.githubusercontent.com
+- /tree/ = folder → browse on GitHub only
+- (no path segment) = repo root → general repository view
+
 Additional Notes
 ----------------
 - Ensure your repository is public for KWGT to access the files
@@ -55,3 +85,4 @@ If files still don't load:
 2. Check that the file paths match exactly (case-sensitive on Unix/Linux systems)
 3. Use the raw.githubusercontent.com domain, not github.com
 4. Ensure KWGT app has proper permissions to fetch remote content
+5. Verify you're using a /blob/ URL (file), not /tree/ (directory)
