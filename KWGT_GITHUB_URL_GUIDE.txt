@@ -1,0 +1,57 @@
+KWGT GitHub URL Guide
+=====================
+
+Issue: SVG files not loading in KWGT app when using GitHub raw content URLs
+
+The Problem
+-----------
+If you're using dynamic GitHub URLs in your KWGT configuration, you may encounter issues where SVG files fail to load or render.
+
+Two common incorrect URL formats:
+
+1. Using refs/heads path structure:
+   https://raw.githubusercontent.com/AshwinSoni-01/Kwgt_assets/refs/heads/main/sets/$gv(iconset)$/$gv(theme)$/$gv(weather)$.svg
+   ❌ This no longer works - GitHub deprecated this path format for raw content
+
+2. Using tree view URL:
+   https://github.com/AshwinSoni-01/Kwgt_assets/tree/main/sets/$gv(iconset)$/$gv(theme)$/$gv(weather)$.svg
+   ❌ This is a directory view URL, not a direct file link - KWGT cannot render SVGs from tree URLs
+
+The Solution
+------------
+Use the correct raw.githubusercontent.com format:
+
+https://raw.githubusercontent.com/AshwinSoni-01/Kwgt_assets/main/sets/$gv(iconset)$/$gv(theme)$/$gv(weather)$.svg
+
+✅ Key points:
+- Use "main" (not "refs/heads/main")
+- Use raw.githubusercontent.com domain for direct file serving
+- KWGT variable substitution ($gv()$) works correctly with this format
+- Returns proper SVG content that can be rendered
+
+URL Format Breakdown
+--------------------
+https://raw.githubusercontent.com/{OWNER}/{REPO}/{BRANCH}/{PATH_TO_FILE}
+
+Example with variables:
+https://raw.githubusercontent.com/AshwinSoni-01/Kwgt_assets/main/sets/$gv(iconset)$/$gv(theme)$/$gv(weather)$.svg
+
+{OWNER} = AshwinSoni-01
+{REPO} = Kwgt_assets
+{BRANCH} = main
+{PATH_TO_FILE} = sets/$gv(iconset)$/$gv(theme)$/$gv(weather)$.svg
+
+Additional Notes
+----------------
+- Ensure your repository is public for KWGT to access the files
+- The raw.githubusercontent.com domain serves unrendered file content
+- This works with any file type (SVG, JSON, PNG, etc.) that KWGT supports
+- Dynamic variables like $gv(iconset)$, $gv(theme)$, etc. are substituted by KWGT at runtime
+
+Troubleshooting
+---------------
+If files still don't load:
+1. Verify your repository is public (Settings > Visibility)
+2. Check that the file paths match exactly (case-sensitive on Unix/Linux systems)
+3. Use the raw.githubusercontent.com domain, not github.com
+4. Ensure KWGT app has proper permissions to fetch remote content
